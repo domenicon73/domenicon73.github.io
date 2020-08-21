@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Calcola</title>
+		<script language='JavaScript' src='MakeAjaxRequest.js' ></script>
+		<script language='JavaScript'>
+/* Calcola la somma, la differenza, il prodotto e
+ * la divisione e la mostra  nel terzo campo.
+ * Ora effettua anche il controllo che il valore presente
+ * nei campi sia intero, e in caso contrario mette 
+ * un testo di avviso a fianco del campo.
+ * La tabella ora ha 3 colonne.
+ * 
+ * Si usa il DOM in modo semplificatro
+ * 
+ * Evolvere registrando le operazioni in coda, 
+ * creando una tabella che rappresenta tutte le operazioni
+ * svolte, con 5 colonne: v1 op v2 = r
+ */
+
+
+function cerca()
+{
+	try {
+		var v1;
+		var v2;
+		var r;
+		var errore = false;
+		
+		cognome = document.f.cognome.value;
+		nome = document.f.nome.value;
+		var url = 'filtra_nomi.jsp?cognome=' + cognome +
+		'&nome=' + nome;
+		makeAjaxRequest(url, 'cback', true, null, 'GET')
+	} 
+	catch (e) {
+		alert('calcola: ' + e.name + ', ' + e.message);
+	}
+
+	return false;
+		
+}		
+
+function cback(xml, tipo)
+{
+	try
+	{
+//		ser = new XMLSerializer();
+//		doc = ser.serializeToString(xml);
+//		alert(doc);
+		
+		var radice;
+		radice = xml.documentElement;
+
+		var stato;
+		stato = radice.getAttribute('stato');
+		if(stato=='ERR')
+		{
+			var msg_list = 
+			   xml.getElementsByTagName('messaggio');
+			alert(msg_list.item(0).childNodes.item(0).nodeValue );
+			document.f.r.value = '';
+			return;
+		}
+
+		var tb;
+  		tb = document.createElement('table');
+		tb.id = 'log';
+		tb.cols='5';
+        tb.setAttribute('border', '5');
+		tb.bgColor='red';
+
+		var conteggio = 0;
+		var ris;
+		lista = radice.childNodes;
+		for(i=0; i < lista.length; i++)
+		{
+			var riga;
+			nome = lista.item(i);
+			if (nome.tagName == 'riga') {
+				riga = document.createElement('tr');
+				if (conteggio % 2 == 0) 
+					riga.bgColor = 'yellow';
+				else 
+					riga.bgColor = 'green';
+				riga.appendChild(Colonna(nome.getAttribute('cognome')));
+				riga.appendChild(Colonna(nome.getAttribute('nome')));
+				tb.appendChild(riga);
+				
+				conteggio++;
+			}
+			
+		}
+		var blocco;
+		blocco = document.getElementById('blocco');
+		var old;
+		old = blocco.childNodes.item(0);
+		blocco.replaceChild(tb, old);
+		   
+	}
+	catch(e)
+	{
+		alert('cback: ' + e.name + ', ' + e.message);
+	}
+	return false;
+}
+
+function Colonna(valore)
+{
+   var colonna;
+   colonna = document.createElement('td');
+   var testo;
+   testo = document.createTextNode(valore);
+   colonna.appendChild(testo);
+
+	return colonna;
+}
+
+		</script>
+	</head>
+	<body>
+     <form name='f' onsubmit='return false;'>
+	    <table>
+	     <tr>
+     	<td> Cognome </td>
+		<td> <input type='text' name='cognome' /> </td> 
+		<td id='err1'> </td> </tr>
+		<td> Nome </td>
+		<td> <input type='text' name='nome' />  </td> 
+		<td id='err2'> </td> </td></tr>
+		</table>
+		<input type='submit' value='Cerca' 
+		   onclick='return cerca();'/>
+     </form>
+ 	 <div id='blocco'>
+ 	 </div>
+	</body>
+</html>

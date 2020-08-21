@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Calcola</title>
+		<script language='JavaScript' src='MakeAjaxRequest.js' ></script>
+		<script language='JavaScript'>
+/* Calcola la somma e la mostra  nel terzo campo.
+ * Mostra la sequenza degli eventi: prima 
+ * onCLick sul pulsante, poi onSubmit sulla form.
+ * Mettere a flase il valore restituito da click_button.
+ * 
+ * Evolvere mettendo diversi bottoni, uno per ogni operazione.
+ */
+
+function cback(xml, tipo)
+{
+   try {
+   	alert(xml);
+   	var result = xml.getElementsByTagName('result');
+	if (result != null) {
+		var r = result.item(0).getAttribute('value');
+		document.f.r.value = r;
+	}
+//	v = (new XMLSerializer()).serializeToString(xml);
+//    alert(v);
+   }
+	catch(e)
+	{
+		alert('cback: ' + e.type + ' ' + e.message);
+	}
+	
+}
+
+function calcola()
+{
+
+	try {
+		var v1;
+		var v2;
+		var r;
+		
+		v1 = document.f.v1.value;
+		v2 = document.f.v2.value;
+//		var url = 'calcola.jsp?v1=' + v1 
+//		     + '&v2=' + v2;
+		var url = 'calcolate.jsp?v1=' + v1 
+		     + '&v2=' + v2;
+		makeAjaxRequest(url, 'cback', true, null, 'GET')
+	}
+	catch(e)
+	{
+		alert(e.name + ' ' + e.message);
+	}
+	return false;
+}
+
+		</script>
+	</head>
+	<body>
+     <form name='f' action='calcola.jsp' method='post'
+	    onsubmit='return calcola()'>
+	    <table>
+	     <tr>
+     	<td> valore 1 </td>
+		<td> <input type='text' name='v1' /> </td> </tr>
+	     <tr>
+		<td> valore 2 </td>
+		<td> <input type='text' name='v2' />  </td> </tr>
+	     <tr>
+		 <td> risultato </td>
+		<td> <input type='text' name='r' />
+		<input type='submit' value='Calcola' 
+		   />  </td> </tr>
+		 </table>
+     </form>
+
+	</body>
+</html>
