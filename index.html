@@ -17,7 +17,7 @@ function cback(xml, tipo)
 {
    try {
    	alert(xml);
-   	var result = xml.getElementsByTagName('result');
+   	var result = document.getElementsByTagName('result');
 	if (result != null) {
 		var r = result.item(0).getAttribute('value');
 		document.f.r.value = r;
