@@ -42,7 +42,7 @@ function cback(xml, tipo)
 {
    try {
    	alert(xml);
-   	var result = document.getElementsByTagName('result');
+   	var result = document.getElementsByTagName('r');
 	if (result != null) {
 		var r = (result.item(0).getAttribute('value'));
 		document.f.r.value = r;
@@ -72,7 +72,7 @@ function cback(xml, tipo)
 	     <tr>
 		 <td> risultato </td>
 		<td> <input type='text' name='r' />
-		<input type='submit' value='calcola' 
+		<input type='submit' value='Calcola' 
 		   />  </td> </tr>
 		 </table>
      </form>
