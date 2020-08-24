@@ -37,31 +37,7 @@ function calcola()
 	}
 	return false;
 }
-
-		</script>
-	</head>
-	<body>
-     <form name='f' action='calcola.jsp' method='post'
-	    onsubmit='return calcola()'>
-	    <table>
-	     <tr>
-     	<td> valore 1 </td>
-		<td> <input type='text' name='v1' /> </td> </tr>
-	     <tr>
-		<td> valore 2 </td>
-		<td> <input type='text' name='v2' />  </td> </tr>
-	     <tr>
-		 <td> risultato </td>
-		<td> <input type='text' name='r' />
-		<input type='submit' value='Calcola' 
-		   />  </td> </tr>
-		 </table>
-     </form>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-		<title>Calcola</title>
-		<script language='JavaScript' src='MakeAjaxRequest.js' ></script>
-		<script language='JavaScript'>
-		
+			
 function cback(xml, tipo)
 {
    try {
@@ -80,5 +56,27 @@ function cback(xml, tipo)
 	}
 	
 }
+
+		</script>
+	</head>
+	<body>
+     <form name='f' action='calcola.jsp' method='post'
+	    onsubmit='return calcola()'>
+	    <table>
+	     <tr>
+     	<td> valore 1 </td>
+		<td> <input type='text' name='v1' /> </td> </tr>
+	     <tr>
+		<td> valore 2 </td>
+		<td> <input type='text' name='v2' />  </td> </tr>
+	     <tr>
+		 <td> risultato </td>
+		<td> <input type='text' name='r' />
+		<input type='submit' value='calcola' 
+		   />  </td> </tr>
+		 </table>
+     </form>
+		
+
 	</body>
 </html>
