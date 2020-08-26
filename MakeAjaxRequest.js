@@ -10,11 +10,11 @@
      // Mozilla,...
     http_request = 
        new XMLHttpRequest();
-/*	if (
+	if (
 	   http_request.overrideMimeType) 
 	 { http_request.
 	    overrideMimeType('text/xml');
-	 } */
+	 } 
 	} else
 	if (window.ActiveXObject) { // IE
 	   try {
