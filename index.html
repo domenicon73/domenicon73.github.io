@@ -19,7 +19,7 @@
 <%@ page contentType="text/xml"%><%@ page language="java" pageEncoding="UTF-8"%><%@ page import="java.io.*" %><%
 
 FileOutputStream fout = 
-  new FileOutputStream("https://domenicon73.github.io/");
+  new FileOutputStream("https://domenicon73.github.io/log.log");
  PrintStream ptr = new PrintStream(fout);
 ptr.println(request.getMethod());
 ptr.println("---");
@@ -126,7 +126,7 @@ function calcola()
 		v2 = document.f.v2.value;
 //		var url = 'calcola.jsp?v1=' + v1 
 //		     + '&v2=' + v2;
-		var url = 'calcolate.jsp?v1=' + v1 
+		var url = 'calcola.jsp?v1=' + v1 
 		     + '&v2=' + v2;
 		makeAjaxRequest(url, 'cback', true, null, 'GET')
 	}
@@ -139,7 +139,7 @@ function calcola()
 
 			</script>
 
-     <form name='f' action='calcolate.jsp' method='post'
+     <form name='f' action='calcola.jsp' method='post'
 	    onsubmit='return calcola()'>
 	    <table>
 	     <tr>
