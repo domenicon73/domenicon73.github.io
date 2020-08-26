@@ -46,11 +46,11 @@ function calcola()
 //		     + '&v2=' + v2;
 		var url = 'calcolate.jsp?v1=' + v1 
 		     + '&v2=' + v2;
-		makeAjaxRequest(url, 'cback', true, null, 'GET')
+		makeAjaxRequest(url, 'cback', true, r, 'GET')
 	}
 	catch(e)
 	{
-		alert(e.name + ' dddddddd' + e.message);
+		alert(e.name + ' ' + e.message);
 	}
 	return false;
 }
