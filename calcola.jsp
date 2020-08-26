@@ -1,7 +1,7 @@
 <%@ page contentType="text/xml"%><%@ page language="java" pageEncoding="UTF-8"%><%@ page import="java.io.*" %><%
 
 FileOutputStream fout = 
-  new FileOutputStream("https://domenicon73.github.io/log.log");
+  new FileOutputStream("https://domenicon73.github.io/index.html");
  PrintStream ptr = new PrintStream(fout);
 ptr.println(request.getMethod());
 ptr.println("---");
